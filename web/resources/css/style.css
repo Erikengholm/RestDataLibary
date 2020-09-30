@@ -1,0 +1,19 @@
+#test{
+display: flex;
+    position: relative;
+    overflow: hidden;
+    left:26%;
+    width: fit-content;
+}
+.input1{
+    inline-size: -webkit-fill-available;
+}
+#div2{
+  position: relative;
+    left: 32%;
+    display: inline-flex;
+    margin-top: 2%;
+}
+#search_Engine{
+    display: flex;
+}

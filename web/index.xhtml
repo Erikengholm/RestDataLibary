@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+         xmlns:f = "http://java.sun.com/jsf/core"    
+
+         xmlns:p="http://primefaces.org/ui"
+         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head> 
+        <title>Libary ekero</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputScript library="js" name="jscode.js"/>
+    </h:head>
+    <h:body>
+        
+        <h:form>     
+            <div id="test">
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Bokens Title"/>
+                <h:inputText value="#{Libary.title}"/>
+                <h:outputLabel value="Bokens Skrivare"/>
+                <h:inputText value="#{Libary.author}"/>
+                <h:outputLabel value="Bokens Storlek"/>
+                <h:inputText value="#{Libary.pagenumber}"/>
+                <h:outputLabel value="Bokens olika genrar sätt en , för varje ny genrer"/>
+                <h:inputText value="#{Libary.genres}"/>
+                <h:message for="number" style="color:blue"/>
+                <f:facet name = "footer">
+               <h:panelGroup style = "display:block; text-align:center">
+                                   <h:commandButton class="input1" value="skicka" action="#{Libary.submit}"/>
+               </h:panelGroup>
+            </f:facet>
+            </h:panelGrid>
+            </div>    
+            <p:dataTable value="#{Libary.allData}" var="b">
+
+                <p:column headerText="ID">#{b.id}</p:column>
+                <p:column headerText="Title">#{b.title}</p:column>
+                <p:column headerText="Skrivare">#{b.author}</p:column>
+                <p:column headerText="Storlek">#{b.pageNumber} Sidor</p:column>
+                <p:column headerText="genrar">
+                    <ui:repeat value="#{Libary.StringToList(b)}" var="bo">
+                        <h:outputText value="#{bo}," />
+                        <br/>
+                    </ui:repeat> 
+                </p:column>
+                
+                <p:column headerText="Funktioner">
+                    <h:commandButton value="Delete" style="margin-bottom:6%;" action="#{Libary.delete(b)}" />
+                    <br></br>
+                    <h:commandButton style="margin-bottom:6%;" action="#{Libary.update(b)}" value="Update"/>
+                </p:column>
+
+            </p:dataTable>
+
+        <div id="div2">
+            <p:selectOneMenu id="console" value="#{Libary.choose}" style="width:125px">
+            <f:selectItem itemLabel="Hela Listan" itemValue="all" />
+            <f:selectItem itemLabel="Hitta namn" itemValue="name" />
+            <f:selectItem itemLabel="Hitta skrivare" itemValue="author" />
+            <f:selectItem itemLabel="Hitta ID" itemValue="id" />
+            </p:selectOneMenu> 
+            <div id="search_Engine">
+            <h:inputText id="search_Engine" value="#{Libary.search}"/>
+
+            <h:commandButton value="få listan" action="#{Libary.listData}"/>
+            </div>
+        </div>
+        </h:form>
+    </h:body>
+</html>
